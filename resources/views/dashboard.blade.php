@@ -24,7 +24,7 @@
 
                 <!-- Formulario para crear un CV básico (con más campos) -->
                 <div class="mt-8 max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('cv.store') }}">
                         @csrf
 
                         <!-- Nombre -->
