@@ -7,7 +7,7 @@
             </div>
 
             <!-- Título sin "Dashboard" -->
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-black-800 leading-tight">
                 {{ __('Crear CV') }}
             </h2>
         </div>
@@ -18,8 +18,8 @@
             <!-- Panel de creación de CV -->
             <div class="bg-gradient-to-r from-cyan-500 via-teal-400 to-teal-200 rounded-lg shadow-xl p-6">
                 <div class="text-gray-900">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Formulario de Creación de CV</h3>
-                    <p class="text-lg text-white">Por favor, rellena los campos a continuación con la información necesaria para generar tu CV.</p>
+                    <h3 class="text-2xl font-semibold mb-4 text-black">Formulario de Creación de CV</h3>
+                    <p class="text-lg text-black">Por favor, rellena los campos a continuación con la información necesaria para generar tu CV.</p>
                 </div>
 
                 <!-- Formulario para crear un CV básico (con más campos) -->
