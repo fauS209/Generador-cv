@@ -30,12 +30,11 @@
                             <td class="px-4 py-2">{{ $cv->email }}</td>
                             <td class="px-4 py-2">{{ $cv->phone }}</td>
                             <td class="px-4 py-2 flex items-center gap-2">
-                                <!-- Botón para editar -->
+                            
                                 <a href="{{ route('cv.edit', $cv->id) }}" class="bg-red-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
                                     Editar
                                 </a>
                                 
-                                <!-- Botón para eliminar -->
                                 <form method="POST" action="{{ route('cv.destroy', $cv->id) }}">
                                     @csrf
                                     @method('DELETE')
@@ -45,7 +44,7 @@
                                     </button>
                                 </form>
                     
-                                <!-- Botón para generar PDF -->
+                            
                                 <a href="{{ route('cv.pdf', $cv->id) }}" class="bg-red-600 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
                                     PDF
                                 </a>
@@ -56,7 +55,7 @@
                 
             </table>
     
-            <!-- Mensaje si no hay CV -->
+          
             @if ($cvs->isEmpty())
                 <p class="mt-4 text-gray-500">No hay CV creados.</p>
             @endif

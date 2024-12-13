@@ -6,11 +6,11 @@
 
         <title>Generador de CV</title>
 
-        <!-- Fonts -->
+       
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Styles / Scripts -->
+     
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
@@ -56,7 +56,7 @@
                     </header>
 
                     <main class="mt-6">
-                       <!-- Descripción del propósito -->
+                       
                        <div class="text-center">
                            <h2 class="text-2xl font-semibold text-[#1F4A46] mb-4">
                                Generador de Currículums Profesionales
@@ -76,7 +76,7 @@
                                             <svg class="h-12 w-auto text-[#1F4A46] lg:h-16 lg:text-[#2C7D7F]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 ..."></path></svg>
                                         </div>
                                     </header>
-                                    <!-- Resto del contenido -->
+                                  
                                     <main>
                                         <p class="text-center text-xl text-[#1F4A46]">Explora las funcionalidades y disfruta de la experiencia.</p>
                                     </main>

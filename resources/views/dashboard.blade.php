@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <!-- Logo en el navbar en la esquina izquierda -->
+           
             <div>
                 <img src="{{ asset('images/pngwing.com.png') }}" alt="Logo" class="w-16 h-16" />
             </div>
 
-            <!-- Título sin "Dashboard" -->
+            
             <h2 class="font-semibold text-xl text-black-800 leading-tight">
                 {{ __('Crear CV') }}
             </h2>
@@ -21,7 +21,7 @@
                     <p class="text-lg text-black">Por favor, rellena los campos a continuación con la información necesaria para generar tu CV.</p>
                 </div>
 
-                <!-- Formulario para crear un CV básico (con más campos) -->
+                
                 <div class="mt-8 max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
                     <form method="POST" action="{{ route('cv.store') }}">
                         @csrf
@@ -90,7 +90,7 @@
                     </form>
                 </div>
 
-            <!-- Sección para editar y eliminar CV -->
+           
             <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
                 <h3 class="text-2xl font-semibold text-black mb-4">Lista de CV</h3>
                 <table class="min-w-full table-auto border-collapse border border-gray-200">
@@ -112,12 +112,12 @@
                     </tbody>
                 </table>
             
-                <!-- Mensaje si no hay CV -->
+               
                 @if ($cvs->isEmpty())
                     <p class="mt-4 text-gray-500">No hay CV creados.</p>
                 @endif
             
-                <!-- Botón para gestionar CVs -->
+               
                 <div class="mt-6">
                     <a href="/cv" class="bg-red-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md">
                         Gestión de CVs

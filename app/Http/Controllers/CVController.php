@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Cv;
 
 class CvController extends Controller
-
-
 {
-   
-   
     public function dashboard()
     {
-        $cvs = Cv::all(); // Obtiene todos los CVs desde la base de datos
-        return view('dashboard', compact('cvs')); // Retorna la vista 'dashboard' con los datos
-    } // Mostrar la lista de CV
+        $cvs = Cv::all();
+        return view('dashboard', compact('cvs'));
+    }
 
     public function index()
     {
         $cvs = Cv::all();
-        return view('cv.index', compact('cvs')); // Asegúrate de tener esta vista creada
+        return view('cv.index', compact('cvs'));
     }
 
-    // Almacenar un nuevo CV
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -45,16 +39,12 @@ class CvController extends Controller
         return redirect()->back()->with('success', 'CV guardado exitosamente.');
     }
 
-    // Mostrar el formulario para editar un CV
     public function edit($id)
     {
         $cv = Cv::findOrFail($id);
-        return view('cv.edit', compact('cv')); // Asegúrate de tener esta vista creada
+        return view('cv.edit', compact('cv'));
     }
 
-    
-
-    // Actualizar un CV existente
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -74,7 +64,6 @@ class CvController extends Controller
         return redirect()->route('cv.index')->with('success', 'CV actualizado exitosamente.');
     }
 
-    // Eliminar un CV
     public function destroy($id)
     {
         $cv = Cv::findOrFail($id);
@@ -84,32 +73,22 @@ class CvController extends Controller
     }
     
     public function generatePdf($id)
-{
-    $cv = Cv::findOrFail($id); // Obtener el CV por su ID
+    {
+        $cv = Cv::findOrFail($id);
 
-    // Crear una nueva instancia de Dompdf
-    $dompdf = new Dompdf();
+        $dompdf = new Dompdf();
 
-    // Configurar opciones para Dompdf (si es necesario)
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
-    $options->set('isPhpEnabled', true);
-    $dompdf->setOptions($options);
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf->setOptions($options);
 
-    // Generar el HTML para el PDF
-    $html = view('cv.pdf', compact('cv'))->render(); // Usamos la vista Blade para el contenido
+        $html = view('cv.pdf', compact('cv'))->render();
 
-    // Cargar el HTML en Dompdf
-    $dompdf->loadHtml($html);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
 
-    // (Opcional) Configurar el tamaño del papel y orientación
-    $dompdf->setPaper('A4', 'portrait');
-
-    // Renderizar el PDF (esto convierte el HTML a PDF)
-    $dompdf->render();
-
-    // Descargar el PDF con el nombre basado en el CV
-    return $dompdf->stream('cv-' . $cv->name . '.pdf', ['Attachment' => 0]);
-}
-
+        return $dompdf->stream('cv-' . $cv->name . '.pdf', ['Attachment' => 0]);
+    }
 }
