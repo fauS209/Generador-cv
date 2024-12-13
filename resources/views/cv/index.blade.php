@@ -1,12 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-black-800 leading-tight">
-            {{ __('Lista de CVs') }}
-        </h2>
+       
+
+        
+        <div>
+            <img src="{{ asset('images/pngwing.com.png') }}" alt="Logo" class="w-16 h-16" />
+        </div>
+
     </x-slot>
 
     <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-2xl font-semibold text-black mb-4">Lista de CV</h3>
+        <h2 class="font-semibold text-xl text-black-800 leading-tight">
+            {{ __('Lista de CVs') }}
+        </h2>
         <table class="min-w-full table-auto border-collapse border border-gray-200">
             <thead class="bg-gray-100">
                 <tr>
@@ -37,10 +43,16 @@
                                     Eliminar
                                 </button>
                             </form>
+            
+                            <!-- Botón para generar PDF -->
+                            <a href="{{ route('cv.pdf', $cv->id) }}" class="bg-red-600 hover:bg-yellow-600 text-white px-4 py-2 rounded-md">
+                                PDF
+                            </a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
+            
         </table>
 
         <!-- Mensaje si no hay CV -->

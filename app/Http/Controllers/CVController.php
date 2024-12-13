@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cv;
+
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Models\Cv;
 
 class CvController extends Controller
 
@@ -79,4 +82,34 @@ class CvController extends Controller
 
         return redirect()->route('cv.index')->with('success', 'CV eliminado exitosamente.');
     }
+    
+    public function generatePdf($id)
+{
+    $cv = Cv::findOrFail($id); // Obtener el CV por su ID
+
+    // Crear una nueva instancia de Dompdf
+    $dompdf = new Dompdf();
+
+    // Configurar opciones para Dompdf (si es necesario)
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', true);
+    $dompdf->setOptions($options);
+
+    // Generar el HTML para el PDF
+    $html = view('cv.pdf', compact('cv'))->render(); // Usamos la vista Blade para el contenido
+
+    // Cargar el HTML en Dompdf
+    $dompdf->loadHtml($html);
+
+    // (Opcional) Configurar el tamaño del papel y orientación
+    $dompdf->setPaper('A4', 'portrait');
+
+    // Renderizar el PDF (esto convierte el HTML a PDF)
+    $dompdf->render();
+
+    // Descargar el PDF con el nombre basado en el CV
+    return $dompdf->stream('cv-' . $cv->name . '.pdf', ['Attachment' => 0]);
+}
+
 }

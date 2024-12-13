@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [CvController::class, 'dashboard'])->name('dashboard');
     Route::get('/cv/{id}/edit', [CvController::class, 'edit'])->name('cv.edit');
     Route::put('/cv/{id}', [CvController::class, 'update'])->name('cv.update');
+    Route::get('/cv/{id}/pdf', [CvController::class, 'generatePdf'])->name('cv.pdf');
 });
 
 require __DIR__.'/auth.php';
