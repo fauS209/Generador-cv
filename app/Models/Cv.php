@@ -9,8 +9,15 @@ class Cv extends Model
 {
     use HasFactory;
 
+    // Definir los campos que son asignables masivamente
     protected $fillable = [
-        'name', 'email', 'phone', 'address', 
-        'experience', 'education', 'skills', 'portfolio'
+        'name',
+        'email',
+        'phone',
+        'address',
+        'experience',
+        'education',
+        'skills',
+        'portfolio',
     ];
 }

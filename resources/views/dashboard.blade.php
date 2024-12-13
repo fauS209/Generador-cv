@@ -15,7 +15,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Panel de creación de CV -->
             <div class="bg-gradient-to-r from-cyan-500 via-teal-400 to-teal-200 rounded-lg shadow-xl p-6">
                 <div class="text-gray-900">
                     <h3 class="text-2xl font-semibold mb-4 text-black">Formulario de Creación de CV</h3>
@@ -90,7 +89,42 @@
                         </div>
                     </form>
                 </div>
+
+            <!-- Sección para editar y eliminar CV -->
+            <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-2xl font-semibold text-black mb-4">Lista de CV</h3>
+                <table class="min-w-full table-auto border-collapse border border-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 border border-gray-300 text-left">Nombre</th>
+                            <th class="px-4 py-2 border border-gray-300 text-left">Correo Electrónico</th>
+                            <th class="px-4 py-2 border border-gray-300 text-left">Teléfono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($cvs as $cv)
+                            <tr class="border-b border-gray-200">
+                                <td class="px-4 py-2">{{ $cv->name }}</td>
+                                <td class="px-4 py-2">{{ $cv->email }}</td>
+                                <td class="px-4 py-2">{{ $cv->phone }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            
+                <!-- Mensaje si no hay CV -->
+                @if ($cvs->isEmpty())
+                    <p class="mt-4 text-gray-500">No hay CV creados.</p>
+                @endif
+            
+                <!-- Botón para gestionar CVs -->
+                <div class="mt-6">
+                    <a href="/cv" class="bg-red-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md">
+                        Gestión de CVs
+                    </a>
+                </div>
             </div>
+            
         </div>
     </div>
 </x-app-layout>

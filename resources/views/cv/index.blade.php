@@ -5,43 +5,47 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <h3 class="text-2xl font-semibold mb-4 text-black">Lista de CVs</h3>
+    <div class="mt-12 bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-semibold text-black mb-4">Lista de CV</h3>
+        <table class="min-w-full table-auto border-collapse border border-gray-200">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border border-gray-300 text-left">Nombre</th>
+                    <th class="px-4 py-2 border border-gray-300 text-left">Correo Electrónico</th>
+                    <th class="px-4 py-2 border border-gray-300 text-left">Teléfono</th>
+                    <th class="px-4 py-2 border border-gray-300 text-left">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($cvs as $cv)
+                    <tr class="border-b border-gray-200">
+                        <td class="px-4 py-2">{{ $cv->name }}</td>
+                        <td class="px-4 py-2">{{ $cv->email }}</td>
+                        <td class="px-4 py-2">{{ $cv->phone }}</td>
+                        <td class="px-4 py-2 flex items-center gap-2">
+                            <!-- Botón para editar -->
+                            <a href="{{ route('cv.edit', $cv->id) }}" class="bg-red-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+                                Editar
+                            </a>
+                            
+                            <!-- Botón para eliminar -->
+                            <form method="POST" action="{{ route('cv.destroy', $cv->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este CV?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-                @if ($cvs->isEmpty())
-                    <p>No hay CVs disponibles.</p>
-                @else
-                    <table class="min-w-full bg-white border border-gray-300">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b">Nombre</th>
-                                <th class="py-2 px-4 border-b">Correo Electrónico</th>
-                                <th class="py-2 px-4 border-b">Teléfono</th>
-                                <th class="py-2 px-4 border-b">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($cvs as $cv)
-                                <tr>
-                                    <td class="py-2 px-4 border-b">{{ $cv->name }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $cv->email }}</td>
-                                    <td class="py-2 px-4 border-b">{{ $cv->phone }}</td>
-                                    <td class="py-2 px-4 border-b">
-                                        <a href="{{ route('cv.edit', $cv->id) }}" class="text-teal-600 hover:text-teal-800">Editar</a>
-                                        <form method="POST" action="{{ route('cv.destroy', $cv->id) }}" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 ml-4">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
-            </div>
-        </div>
+        <!-- Mensaje si no hay CV -->
+        @if ($cvs->isEmpty())
+            <p class="mt-4 text-gray-500">No hay CV creados.</p>
+        @endif
     </div>
 </x-app-layout>
